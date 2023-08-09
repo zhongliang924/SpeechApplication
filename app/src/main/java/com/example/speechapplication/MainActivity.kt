@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity(), WebSocketCallback {
     }
 
     private lateinit var speechRecognition: SpeechRecognition
+    private lateinit var wakeWordRecognizer: WakeWordRecognizer
 
     private lateinit var btn: Button
     private lateinit var btnClear: Button
@@ -26,18 +27,20 @@ class MainActivity : AppCompatActivity(), WebSocketCallback {
     private lateinit var logView: ScrollView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
+        speechRecognition = SpeechRecognition(this, this)
         setContentView(R.layout.activity_main)
         setUI()
         instance = this
-        speechRecognition.startRecord()
-        speechRecognition.stopRecord()
+
+        wakeWordRecognizer = WakeWordRecognizer(this)
+
+        // speechRecognition.startRecord()
+        // speechRecognition.stopRecord()
 
     }
 
     private fun setUI() {
-        speechRecognition = SpeechRecognition(this, this)
         // 设置 button 监听器
         btn = findViewById(R.id.button)
         btn.setOnClickListener { finish() }
@@ -55,7 +58,6 @@ class MainActivity : AppCompatActivity(), WebSocketCallback {
 
     /**
      * 在应用程序运行时记录和显示各种调试和状态信息
-     * text 参数表示需要显示的文本内容， color 参数表示该文本颜色
      */
     fun updateLog(text: String, color: String) {
         log.post{
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity(), WebSocketCallback {
     /**
      * 清除日志区的消息
      */
-    private fun clearLog() {
+    fun clearLog() {
         log.post {
             strLog = ""
             currLogLineNum = 0
@@ -97,6 +99,16 @@ class MainActivity : AppCompatActivity(), WebSocketCallback {
         Thread.sleep(3000)
         val intent = Intent(this, ListeningActivity::class.java)
         this.startActivity(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        wakeWordRecognizer.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        wakeWordRecognizer.onPause()
     }
 
 }

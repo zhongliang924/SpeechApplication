@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Vibrator;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
@@ -16,8 +17,7 @@ import edu.cmu.pocketsphinx.RecognitionListener;
 import edu.cmu.pocketsphinx.SpeechRecognizer;
 import edu.cmu.pocketsphinx.SpeechRecognizerSetup;
 
-public class WakeWordRecognizer implements RecognitionListener {
-
+public class WakeWordRecognizer implements RecognitionListener, WebSocketCallback {
     private static final String WAKEWORD_SEARCH = "WAKEWORD_SEARCH";
     private static final String LOG_TAG = ListeningActivity.class.getName();
     private final Context context;
@@ -118,9 +118,12 @@ public class WakeWordRecognizer implements RecognitionListener {
                     Intent intent = new Intent(activity, MainActivity.class);
                     activity.startActivity(intent);
                 } else if (activity.getClass() == MainActivity.class) {
-                    // 使用 Activity 上下文启动 MainActivity
-                    Intent intent = new Intent(activity, ListeningActivity.class);
-                    activity.startActivity(intent);
+                    onPause();
+                    SpeechRecognition recognition = new SpeechRecognition(activity, this);
+                    recognition.startRecord();
+                    recognition.stopRecord();
+
+                    onResume();
                 }
             }
         }
@@ -144,5 +147,14 @@ public class WakeWordRecognizer implements RecognitionListener {
     @Override
     public void onTimeout() {
         Log.d(LOG_TAG, "on Timeout");
+    }
+
+    @Override
+    public void onDataReceived(@NonNull String data) {
+        if (data.contains("返回")) {
+            activity.finish();
+        } else if(data.contains("清空")) {
+            MainActivity.instance.clearLog();
+        }
     }
 }

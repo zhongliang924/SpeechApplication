@@ -130,7 +130,7 @@ class SpeechRecognition(private val activity: Activity, private val callback: We
     /**
      * 开启录音线程，并将录音数据通过 WebSocket 发送给服务端
      */
-    private val readThread = Thread {
+    val readThread = Thread {
         val mindB = 1000
         val delayTime = 1.0
         val buffer = ByteArray(minBufferSize)
@@ -186,7 +186,7 @@ class SpeechRecognition(private val activity: Activity, private val callback: We
     }
 
 
-    private val stopRecordThread = Thread {
+    val stopRecordThread = Thread {
         while (true) {
             if (!isRecording) {
                 MainActivity.instance.updateLog("----> 停止录音线程", "green")
