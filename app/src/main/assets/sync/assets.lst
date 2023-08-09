@@ -1,0 +1,9 @@
+models/lm/words.dic
+models/zh-cn-ptm/feat.params
+models/zh-cn-ptm/feature_transform
+models/zh-cn-ptm/mdef
+models/zh-cn-ptm/means
+models/zh-cn-ptm/mixture_weights
+models/zh-cn-ptm/noisedict
+models/zh-cn-ptm/transition_matrices
+models/zh-cn-ptm/variances

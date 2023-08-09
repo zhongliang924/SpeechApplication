@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">语音应用</string>
+    <string name="wake_wordx">ringo</string>
+    <string name="wake_word">小趣小趣</string>
+    <string name="seek_bar_title">Sense.:</string>
+
+    <!--    Button strings    -->
+    <string name="Return">返回</string>
+    <string name="start_record">开始录音</string>
+    <string name="stop_record">停止录音</string>
+
+    <!--    Text strings    -->
+    <string name="message">点击“开始录音”按钮开启麦克风</string>
+    <string name="status">未连接到服务器</string>
+    <string name="result">此处显示语音识别结果</string>
+    <string name="clear">清空</string>
+    <string name="log">日志：</string>
+
+</resources>
