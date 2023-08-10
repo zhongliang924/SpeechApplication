@@ -51,7 +51,7 @@ public class WakeWordRecognizer implements RecognitionListener, WebSocketCallbac
                 recognizer = SpeechRecognizerSetup.defaultSetup()
                         .setAcousticModel(new File(assetDir, "models/zh-cn-ptm"))   // 设置音频模型文件
                         .setDictionary(new File(assetDir, "models/lm/words.dic"))   // 设置字典文件
-                        .setKeywordThreshold(Float.parseFloat("1.e-" + 2 * sensibility))    // 设置唤醒词灵敏度值
+                        .setKeywordThreshold(Float.parseFloat("1.e-" + 4 * sensibility))    // 设置唤醒词灵敏度值
                         .getRecognizer();   // 获取 SpeechRecognizer 对象的引用
                 recognizer.addKeyphraseSearch(WAKEWORD_SEARCH, context.getString(R.string.wake_word)); // 添加关键词搜索
                 recognizer.addListener(this);
