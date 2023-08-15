@@ -122,7 +122,6 @@ public class WakeWordRecognizer implements RecognitionListener, WebSocketCallbac
                     SpeechRecognition recognition = new SpeechRecognition(activity, this);
                     recognition.startRecord();
                     recognition.stopRecord();
-
                     onResume();
                 }
             }

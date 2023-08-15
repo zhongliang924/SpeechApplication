@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-console-app1",
+  "version": "0.0.0",
+  "description": "NodejsConsoleApp1",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  },
+  "devDependencies": {
+    "eslint": "^8.21.0"
+  },
+  "eslintConfig": {},
+  "dependencies": {
+    "node-gyp": "^9.4.0",
+    "wav": "^1.0.2",
+    "websocket": "^1.0.34",
+    "ws": "^8.13.0"
+  }
+}
